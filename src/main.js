@@ -162,6 +162,7 @@ function renderLogin() {
   })
 }
 
+// user
 async function renderUser() {
   app.innerHTML = userPage
 
@@ -182,6 +183,8 @@ async function renderUser() {
 
     const data = await response.json()
 
+    console.log('User data:', data)
+
     if (!response.ok) {
       if (response.status === 401) {
         window.history.pushState({}, '', '/login')
@@ -193,9 +196,45 @@ async function renderUser() {
 
     const user = data.data
     welcome.textContent = `Welcome back, ${user.username}!`
-    document.querySelector('#display-username').textContent = user.username
-    document.querySelector('#display-email').textContent = user.email
-    document.querySelector('#display-role').textContent = user.role
+    
+    // Set Avatar if available, otherwise show fallback with first character of username
+    const avatarImg = document.querySelector('#user-avatar')
+    const avatarFallback = document.querySelector('#user-avatar-fallback')
+    
+    const showFallback = () => {
+      avatarImg.style.display = 'none'
+      avatarFallback.style.display = 'flex'
+      avatarFallback.textContent = user.username ? user.username.charAt(0).toUpperCase() : 'U'
+    }
+
+    if (user.avatar && user.avatar.url) {
+      avatarImg.src = user.avatar.url
+      avatarImg.style.display = 'block'
+      avatarFallback.style.display = 'none'
+      
+      // If the image fails to load, fallback to initial
+      avatarImg.onerror = showFallback
+    } else {
+      showFallback()
+    }
+
+    // Set other details
+    document.querySelector('#display-id').textContent = user._id || 'N/A'
+    document.querySelector('#display-username').textContent = user.username || 'N/A'
+    document.querySelector('#display-email').textContent = user.email || 'N/A'
+    document.querySelector('#display-role').textContent = user.role || 'N/A'
+    document.querySelector('#display-login-type').textContent = user.loginType || 'N/A'
+    document.querySelector('#display-email-verified').textContent = user.isEmailVerified ? 'Yes' : 'No'
+    
+    // Format Dates
+    const formatDate = (dateString) => {
+      if (!dateString) return 'N/A'
+      return new Date(dateString).toLocaleString()
+    }
+    
+    document.querySelector('#display-created').textContent = formatDate(user.createdAt)
+    document.querySelector('#display-updated').textContent = formatDate(user.updatedAt)
+
     details.style.display = 'block'
   } catch (error) {
     status.className = 'status error'
