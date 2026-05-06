@@ -1,0 +1,33 @@
+<section class="page auth-page">
+  <div class="auth-header">
+    <h1>Login to your account</h1>
+    <p>Enter your username below to login to your account</p>
+  </div>
+
+  <form id="login-form" class="auth-form">
+    <label class="field">
+      <span>Username</span>
+      <input type="text" name="username" placeholder="username" autocomplete="username" required />
+    </label>
+
+    <label class="field">
+      <div class="field-header">
+        <span>Password</span>
+      </div>
+      <input
+        type="password"
+        name="password"
+        autocomplete="current-password"
+        required
+      />
+    </label>
+
+    <button type="submit" id="login-btn" class="primary-btn">Login</button>
+  </form>
+
+  <p id="login-status" class="status" role="status" aria-live="polite"></p>
+
+  <div class="auth-links text-center">
+    <span class="muted">Don't have an account?</span> <a class="nav-link" href="/register">Sign up</a>
+  </div>
+</section>

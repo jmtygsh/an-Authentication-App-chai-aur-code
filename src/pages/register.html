@@ -1,0 +1,59 @@
+<section class="page auth-page">
+  <div class="auth-header">
+    <h1>Create account</h1>
+    <p>Fill in your details to get started.</p>
+  </div>
+
+  <form id="register-form" class="auth-form">
+    <label class="field">
+      <span>Email</span>
+      <input type="email" name="email" placeholder="user.email@domain.com" autocomplete="email" required />
+    </label>
+
+    <label class="field">
+      <span>Username</span>
+      <input type="text" name="username" placeholder="doejohn" autocomplete="username" required />
+    </label>
+
+    <label class="field">
+      <span>Role</span>
+      <select name="role" required>
+        <option value="ADMIN" selected>ADMIN</option>
+        <option value="USER">USER</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span>Password</span>
+      <input
+        type="password"
+        name="password"
+        placeholder="Create a strong password"
+        autocomplete="new-password"
+        required
+      />
+    </label>
+
+    <label class="field">
+      <span>Confirm Password</span>
+      <input
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm your password"
+        autocomplete="new-password"
+        required
+      />
+    </label>
+
+    <button type="submit" id="register-btn" class="primary-btn">Sign Up</button>
+  </form>
+
+  <p id="register-status" class="status" role="status" aria-live="polite"></p>
+
+  <div class="auth-links text-center" style="flex-direction: column; align-items: center; gap: 12px;">
+    <div>
+      <span class="muted">Already have an account?</span> <a class="nav-link" href="/login">Login</a>
+    </div>
+    <a class="nav-link muted" href="/">Back to home</a>
+  </div>
+</section>
